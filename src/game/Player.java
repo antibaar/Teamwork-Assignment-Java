@@ -5,9 +5,9 @@ import gfx.Assets;
 import java.awt.*;
 
 public class Player {
-    private int x, y;
+    public int x, y;
     private int velocity;
-    private int width, height;
+    public int width, height;
     private int health;
 
     private Rectangle boundingBox;
@@ -61,10 +61,14 @@ public class Player {
         if(goingRight) {
             this.x += this.velocity;
         }
+
     }
 
     //Draws the player
     public void render(Graphics g) {
         g.drawImage(Assets.player1, this.x, this.y, null);
     }
+
+
+
 }

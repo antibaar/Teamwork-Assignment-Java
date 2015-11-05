@@ -33,6 +33,7 @@ public class Game implements Runnable{
     //Player
     public static Player player;
     public static Rectangle enemy;
+    public static Rectangle enemy2;
 
     public Game(String title, int width, int height) {
         this.width = width;
@@ -61,7 +62,7 @@ public class Game implements Runnable{
         StateManager.setState(gameState);
 
         player = new Player();
-        enemy = new Rectangle(1200, 20, 30, 650);
+        enemy = new Rectangle(1200, 0, 30, 650);
     }
 
 
@@ -72,7 +73,7 @@ public class Game implements Runnable{
             StateManager.getState().tick();
         }
         player.tick();
-        if(player.Intersects(enemy)) {
+        if(player.x > enemy.x - player.width + 30) {
             System.out.print("You died");
             stop();
         }
@@ -104,6 +105,7 @@ public class Game implements Runnable{
         g.setColor(Color.red);
         g.fillRect(this.enemy.x, this.enemy.y, this.enemy.width, this.enemy.height);
 
+        //g.fillRect(this.enemy.x, this.enemy2.y, this.enemy2.width, this.enemy2.height);
         //Checks if a State exists and render()
         if (StateManager.getState() != null){
             StateManager.getState().render(this.g);
