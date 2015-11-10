@@ -6,6 +6,7 @@ import gfx.ImageLoader;
 import gfx.SpriteSheet;
 import states.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -14,6 +15,7 @@ public class Game implements Runnable{
     private Display display;
     public int width, height;
     public String title;
+
 
     private boolean running = false;
     private Thread thread;
@@ -39,6 +41,7 @@ public class Game implements Runnable{
         this.width = width;
         this.height = height;
         this.title = title;
+
     }
 
     //Initializes all the graphics and it will get
@@ -104,6 +107,8 @@ public class Game implements Runnable{
         player.render(g);
         g.setColor(Color.red);
         g.fillRect(this.enemy.x, this.enemy.y, this.enemy.width, this.enemy.height);
+
+
 
         //g.fillRect(this.enemy.x, this.enemy2.y, this.enemy2.width, this.enemy2.height);
         //Checks if a State exists and render()

@@ -2,6 +2,8 @@ package display;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class Display extends Canvas{
     //Creating our Window frame
@@ -9,17 +11,33 @@ public class Display extends Canvas{
     //Creating a field on which we draw
     private Canvas canvas;
 
-    private String title;
+    private String title, input;
     private int width, height;
+
+    public JTextField getField() {
+        return field;
+    }
+
+    public void setField(JTextField field) {
+        this.field = field;
+    }
+
+    private JTextField field = new JTextField(10);
 
     public Display(String title, int width, int height) {
         this.title = title;
         this.width = width;
         this.height = height;
 
+
         //Creating the JFrame
         createDisplay();
     }
+    public Display(JTextField field){
+        this.field = field;
+    }
+
+
 
     private void createDisplay() {
         //Creates a new Frame with a title
@@ -36,6 +54,12 @@ public class Display extends Canvas{
         frame.setVisible(true);
         //Enabling the frame to be focusable
         frame.setFocusable(true);
+        //JPanel contentPane = new JPanel(new BorderLayout());
+        frame.add(field, BorderLayout.SOUTH);
+
+        field.requestFocus();
+
+
 
         //Initializing Canvas in the window
         canvas = new Canvas();

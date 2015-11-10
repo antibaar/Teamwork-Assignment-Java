@@ -2,18 +2,41 @@ package game;
 
 import display.Display;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class InputHandler implements KeyListener {
 
+    private String input;
     public InputHandler(Display display) {
         display.getCanvas().addKeyListener(this);
+        display.getField().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    input = display.getField().getText();
+                    System.out.println(input);
+                    display.getField().setText("");
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
+
 
         if (keyCode == KeyEvent.VK_UP) {
             Game.player.goingUp = true;
