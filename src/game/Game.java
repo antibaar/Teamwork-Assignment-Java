@@ -16,9 +16,9 @@ public class Game implements Runnable{
     public int width, height;
     public String title;
     private LogoSpawner logoSpawner;
-    public int x = 50;
+    //public int x = 50;
     public int velocityX;
-    public BufferedImage image;
+    //public BufferedImage image;
     //public static String currentInput;
 
     private ListOfWordWithImages listOfWordWithImages;
@@ -40,7 +40,7 @@ public class Game implements Runnable{
 
     //Player
     //public static Player player;
-    public Rectangle enemy;
+    //public Rectangle enemy;
     //public static Rectangle enemy2;
 
     public Game(String title, int width, int height) {
@@ -48,11 +48,12 @@ public class Game implements Runnable{
         this.height = height;
         this.title = title;
         this.listOfWordWithImages = new ListOfWordWithImages();
-        this.x = 50;
+        //this.x = 50;
         this.velocityX = 3;
 
 
     }
+
 
 
 
@@ -77,11 +78,12 @@ public class Game implements Runnable{
         StateManager.setState(gameState);
 
         //player = new Player();
-        enemy = new Rectangle(1200, 0, 80, 720);
+//        enemy = new Rectangle(1200, 0, 80, 720);
         listOfWordWithImages.initFromFile();
 
-        this.image = listOfWordWithImages.getRandomWord().getImage();
+        //this.image = listOfWordWithImages.getRandomWord().getImage();
         this.logoSpawner = new LogoSpawner();
+
 
     }
 
@@ -101,7 +103,9 @@ public class Game implements Runnable{
 //        if(!listOfWordWithImages.selectedImage.getWord().equals(currentInput)) {
 //            x += velocityX;
 //        }
-
+        if(logoSpawner.dead == 1){
+            stop();
+        }
     }
 
     //The method that will draw everything on the canvas
@@ -137,8 +141,8 @@ public class Game implements Runnable{
 
 
         //player.render(g);
-        g.setColor(Color.red);
-        g.fillRect(this.enemy.x, this.enemy.y, this.enemy.width, this.enemy.height);
+//        g.setColor(Color.red);
+//        g.fillRect(this.enemy.x, this.enemy.y, this.enemy.width, this.enemy.height);
 
 
 

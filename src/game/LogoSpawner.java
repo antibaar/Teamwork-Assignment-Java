@@ -2,8 +2,10 @@ package game;
 
 import game.Game;
 import gfx.Assets;
+import org.w3c.dom.css.Rect;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -21,10 +23,14 @@ public class LogoSpawner {
     private int num = 5;
     private int min = 1;
     private int max = 2;
+    public int dead = 0;
     private ArrayList<Integer> listY;
     //private InputHandler inputHandler;
     //private WordWithImage wordWithImage;
-    public Game game;
+    //public int x = 0;
+    public BufferedImage image;
+    Game game;
+    public Rectangle enemy = new Rectangle(1200, 0, 80, 720);
 
     public LogoSpawner() {
         this.currentLogos = 0;
@@ -34,7 +40,7 @@ public class LogoSpawner {
         list = new ArrayList<>();
         listX = new ArrayList<>();
         listY = new ArrayList<>();
-        list.add(new WordWithImage(Assets.adidas, "adidas"));
+        list.add(new WordWithImage(listOfWordWithImages.getRandomWord().getImage(), listOfWordWithImages.getRandomWord().getWord()));
         list.add(new WordWithImage(Assets.amazon, "amazon"));
         list.add(new WordWithImage(Assets.angrybirds, "angry birds"));
         list.add(new WordWithImage(Assets.apple, "apple"));
@@ -63,16 +69,18 @@ public class LogoSpawner {
         }
     }
     public void renderImage(Graphics g){
-
+        g.setColor(Color.red);
+        g.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
         for (int i = 0; i < num; i++) {
-            if(game.x > game.enemy.x - list.get(i).getImage().getWidth() + 30) {
+            if(listX.get(i) > enemy.x - list.get(i).getImage().getWidth() + 30) {
                 System.out.print("You died");
-                game.stop();
+                dead = 1;
             }
+
             if(!list.get(i).getWord().equals(currentInput)) {
                 if(!list.get(i).getImage().equals(Assets.transparent)){
                     g.drawImage(list.get(i).getImage(), listX.get(i), listY.get(i), 75, 75, null);
-                    listX.set(i, listX.get(i) + 1);
+                    listX.set(i, listX.get(i) + 3);
                 }
 
             }
