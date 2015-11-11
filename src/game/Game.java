@@ -10,13 +10,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class Game implements Runnable{
     private Display display;
     public int width, height;
     public String title;
+    private LogoSpawner logoSpawner;
+    public int x = 50;
+    public int velocityX;
+    public BufferedImage image;
+    //public static String currentInput;
 
+    private ListOfWordWithImages listOfWordWithImages;
 
     private boolean running = false;
     private Thread thread;
@@ -34,16 +39,22 @@ public class Game implements Runnable{
     private State settingsState;
 
     //Player
-    public static Player player;
-    public static Rectangle enemy;
-    public static Rectangle enemy2;
+    //public static Player player;
+    public Rectangle enemy;
+    //public static Rectangle enemy2;
 
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
         this.title = title;
+        this.listOfWordWithImages = new ListOfWordWithImages();
+        this.x = 50;
+        this.velocityX = 3;
+
 
     }
+
+
 
     //Initializes all the graphics and it will get
     //everything ready for our game
@@ -52,7 +63,6 @@ public class Game implements Runnable{
         display = new Display(this.title, this.width, this.height);
         img = ImageLoader.loadImage("/textures/bckg.png");
         sh = new SpriteSheet(ImageLoader.loadImage("/textures/java.png"));
-
 
 
         this.inputHandler = new InputHandler(this.display);
@@ -66,8 +76,13 @@ public class Game implements Runnable{
         //any more states set up
         StateManager.setState(gameState);
 
-        player = new Player();
-        enemy = new Rectangle(1200, 0, 30, 650);
+        //player = new Player();
+        enemy = new Rectangle(1200, 0, 80, 720);
+        listOfWordWithImages.initFromFile();
+
+        this.image = listOfWordWithImages.getRandomWord().getImage();
+        this.logoSpawner = new LogoSpawner();
+
     }
 
 
@@ -77,11 +92,15 @@ public class Game implements Runnable{
         if (StateManager.getState() != null) {
             StateManager.getState().tick();
         }
-        player.tick();
-        if(player.x > enemy.x - player.width + 30) {
-            System.out.print("You died");
-            stop();
-        }
+        //player.tick();
+//        if(x > enemy.x - image.getWidth() + 30) {
+//            System.out.print("You died");
+//            stop();
+//        }
+
+//        if(!listOfWordWithImages.selectedImage.getWord().equals(currentInput)) {
+//            x += velocityX;
+//        }
 
     }
 
@@ -104,18 +123,22 @@ public class Game implements Runnable{
         g.clearRect(0, 0, this.width, this.height);
         //Beginning of drawing things on the screen
 
-        //g.drawImage(img, 0, 0, this.width, this.height, null);
+        g.drawImage(img, 0, 0, this.width, this.height, null);
 
-        player.render(g);
+
+
+        //logoSpawner.spawner(g, currentInput, listOfWordWithImages.selectedImage, x);
+
+
+
+
+        logoSpawner.renderImage(g);
+
+
+
+        //player.render(g);
         g.setColor(Color.red);
         g.fillRect(this.enemy.x, this.enemy.y, this.enemy.width, this.enemy.height);
-
-        g.drawImage(Assets.java, 50, 100, 128, 128, null);
-
-        ArrayList<BufferedImage> list = new ArrayList<>();
-
-        list.add(Assets.java);
-
 
 
 
