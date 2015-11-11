@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Game implements Runnable{
     private Display display;
@@ -51,6 +52,7 @@ public class Game implements Runnable{
         display = new Display(this.title, this.width, this.height);
         img = ImageLoader.loadImage("/textures/bckg.png");
         sh = new SpriteSheet(ImageLoader.loadImage("/textures/java.png"));
+
 
 
         this.inputHandler = new InputHandler(this.display);
@@ -102,11 +104,19 @@ public class Game implements Runnable{
         g.clearRect(0, 0, this.width, this.height);
         //Beginning of drawing things on the screen
 
-        g.drawImage(img, 0, 0, this.width, this.height, null);
+        //g.drawImage(img, 0, 0, this.width, this.height, null);
 
         player.render(g);
         g.setColor(Color.red);
         g.fillRect(this.enemy.x, this.enemy.y, this.enemy.width, this.enemy.height);
+
+        g.drawImage(Assets.java, 50, 100, 128, 128, null);
+
+        ArrayList<BufferedImage> list = new ArrayList<>();
+
+        list.add(Assets.java);
+
+
 
 
 

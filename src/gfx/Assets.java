@@ -11,8 +11,10 @@ public class Assets {
     //Loads every resource needed for the game
     public static void init() {
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/java.png"));
+        java = ImageLoader.loadImage("/textures/java.png");
 
         player1 = sheet.crop(0, 0, width, height);
         player2 = sheet.crop(0, 0, width, height);
     }
+    public static BufferedImage java;
 }
