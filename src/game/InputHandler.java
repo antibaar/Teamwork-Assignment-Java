@@ -24,6 +24,9 @@ public class InputHandler implements KeyListener {
                     System.out.println(LogoSpawner.currentInput);
                     display.getField().setText("");
                 }
+                else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    System.exit(0);
+                }
             }
 
             @Override

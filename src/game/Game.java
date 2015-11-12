@@ -26,6 +26,7 @@ public class Game implements Runnable{
     private boolean running = false;
     private Thread thread;
 
+    private boolean check = false;
     private InputHandler inputHandler;
     private BufferStrategy bs;
     private Graphics g;
@@ -82,7 +83,7 @@ public class Game implements Runnable{
         listOfWordWithImages.initFromFile();
 
         //this.image = listOfWordWithImages.getRandomWord().getImage();
-        this.logoSpawner = new LogoSpawner();
+        this.logoSpawner = new LogoSpawner(listOfWordWithImages);
 
 
     }
@@ -103,9 +104,8 @@ public class Game implements Runnable{
 //        if(!listOfWordWithImages.selectedImage.getWord().equals(currentInput)) {
 //            x += velocityX;
 //        }
-        if(logoSpawner.dead == 1){
-            stop();
-        }
+
+
     }
 
     //The method that will draw everything on the canvas
@@ -131,12 +131,42 @@ public class Game implements Runnable{
 
 
 
+        Font font2 = new Font("arial", Font.BOLD, 30);
+        g.setFont(font2);
+        g.setColor(Color.BLACK);
+        g.drawString("Score: " + logoSpawner.score, 10, 705);
+        g.drawString("Lives: " + (logoSpawner.lives - 1), 310, 705);
+
+        if(check){
+            stop();
+        }
+        else{
+            logoSpawner.renderImage(g);
+        }
+
+        if(logoSpawner.score - logoSpawner.lives * 100 >= 1200){
+            Font font = new Font("arial", Font.BOLD, 60);
+            g.setFont(font);
+            g.setColor(Color.GREEN);
+            g.drawString("You win!", 500, 300);
+            check = true;
+        }
+        if(logoSpawner.dead == 1){
+            Font font = new Font("arial", Font.BOLD, 60);
+            g.setFont(font);
+            g.setColor(Color.RED);
+            g.drawString("You lose!", 500, 300);
+            check = true;
+        }
+
+
+
         //logoSpawner.spawner(g, currentInput, listOfWordWithImages.selectedImage, x);
 
 
 
 
-        logoSpawner.renderImage(g);
+
 
 
 
@@ -149,9 +179,9 @@ public class Game implements Runnable{
 
         //g.fillRect(this.enemy.x, this.enemy2.y, this.enemy2.width, this.enemy2.height);
         //Checks if a State exists and render()
-        if (StateManager.getState() != null){
-            StateManager.getState().render(this.g);
-        }
+//        if (StateManager.getState() != null){
+//            StateManager.getState().render(this.g);
+//        }
 
         //End of drawing objects
 
@@ -200,7 +230,6 @@ public class Game implements Runnable{
             }
 
             if (timer >= 1_000_000_000) {
-                System.out.println("Ticks and Frames: " + ticks);
                 ticks = 0;
                 timer = 0;
             }
