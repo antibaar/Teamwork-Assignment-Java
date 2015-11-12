@@ -1,20 +1,13 @@
 package game;
 
-import game.Game;
 import gfx.Assets;
-import org.w3c.dom.css.Rect;
+
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by Discord on 11/11/2015.
- */
 public class LogoSpawner {
-    private final int LOGO_LIMIT = 15;
-    private int currentLogos;
     private ListOfWordWithImages listOfWordWithImages;
     private ArrayList<WordWithImage> list;
     private ArrayList<Integer> listX;
@@ -29,18 +22,13 @@ public class LogoSpawner {
     public int count = 0;
     public boolean check = false;
     private ArrayList<Integer> listY;
-    //private InputHandler inputHandler;
-    //private WordWithImage wordWithImage;
-    //public int x = 0;
-    public BufferedImage image;
+
 
     public Rectangle enemy = new Rectangle(1200, 0, 80, 720);
 
     public LogoSpawner(ListOfWordWithImages List) {
-        this.currentLogos = 0;
         this.listOfWordWithImages = List;
-        //wordWithImage = new WordWithImage(Assets.adidas, "adidas");
-        //wordWithImage = listOfWordWithImages.getRandomWord();
+
         list = new ArrayList<>();
         listX = new ArrayList<>();
         listY = new ArrayList<>();
@@ -61,14 +49,6 @@ public class LogoSpawner {
 
     }
 
-    public void spawner(WordWithImage wordWithImage, int x){
-        while(currentLogos <= LOGO_LIMIT){
-
-//            if(!wordWithImage.getWord().equals(input)){
-//                g.drawImage(wordWithImage.getImage(), x, 50, 128, 128, null);
-//            }
-        }
-    }
     public void renderImage(Graphics g){
 
 
@@ -106,11 +86,6 @@ public class LogoSpawner {
                     }
             }
             else{
-                //list.set(i, new WordWithImage(listOfWordWithImages.getRandomWord().getImage(), listOfWordWithImages.word));
-//                if(!(list.get(i) == list.get(0) || list.get(i) == list.get(1) || list.get(i) == list.get(2) || list.get(i) == list.get(3) || list.get(i) == list.get(4))) {
-//                    list.set(i, new WordWithImage(listOfWordWithImages.getRandomWord().getImage(), listOfWordWithImages.getRandomWord().getWord()));
-//               }
-
 
                 listX.set(i + count, 5);
                 list.set(i + count, temp);
@@ -127,8 +102,6 @@ public class LogoSpawner {
 
     public int randomVelocity(int min, int max){
         Random rand = new Random();
-        int velocity = rand.nextInt((max - min) + 1) + min;
-
-        return velocity;
+        return rand.nextInt((max - min) + 1) + min;
     }
 }

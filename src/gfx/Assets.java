@@ -1,17 +1,12 @@
 package gfx;
 
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
-import java.util.HashMap;
 
 public class Assets {
 
-    private static final int width = 128, height = 128;
+    public static BufferedImage  adidas, angrybirds, apple, audi, facebook, amazon, google, intel, msn, starwars, sega, nike, wikipedia,samsung, microsoft, transparent;
 
-    public static BufferedImage player1, player2, adidas, angrybirds, apple, audi, facebook, amazon, google, intel, msn, starwars, sega, nike, wikipedia,samsung, microsoft, transparent;
-    //Loads every resource needed for the game
     public static void init() {
-        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/java.png"));
         adidas = ImageLoader.loadImage("/textures/adidas.png");
         angrybirds = ImageLoader.loadImage("/textures/angrybirds.png");
         apple = ImageLoader.loadImage("/textures/apple.png");
@@ -32,7 +27,5 @@ public class Assets {
 
         transparent = ImageLoader.loadImage("/textures/transparent.png");
 
-        player1 = sheet.crop(0, 0, width, height);
-        player2 = sheet.crop(0, 0, width, height);
     }
 }
