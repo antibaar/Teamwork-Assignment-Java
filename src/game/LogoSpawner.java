@@ -45,13 +45,9 @@ public class LogoSpawner {
             }
         }
 
-
-
     }
 
     public void renderImage(Graphics g){
-
-
 
         g.setColor(Color.red);
         g.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
@@ -95,8 +91,6 @@ public class LogoSpawner {
                 currentInput = "";
 
             }
-
-
         }
     }
 

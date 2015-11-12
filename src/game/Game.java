@@ -86,7 +86,7 @@ public class Game implements Runnable{
             g.drawString("You lose!", 500, 300);
             check = true;
         }
-        
+
         bs.show();
         g.dispose();
     }

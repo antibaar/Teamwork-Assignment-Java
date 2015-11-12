@@ -15,7 +15,7 @@ public class ListOfWordWithImages {
     public String word;
 
     public ListOfWordWithImages() {
-        this.listOfWords = new ArrayList<WordWithImage>();
+        this.listOfWords = new ArrayList<>();
         this.numberOfPassedWords=0;
     }
 
@@ -41,12 +41,6 @@ public class ListOfWordWithImages {
         listOfWords.add(new WordWithImage(Assets.transparent, "1"));
     }
 
-    public boolean areAllWordsPassed()  {
-    if (this.listOfWords.size()==this.numberOfPassedWords) {
-        return true;
-    }
-    return false;
-    }
 
     public WordWithImage getRandomWord() {
             while (this.numberOfPassedWords<this.listOfWords.size()) {
@@ -55,7 +49,6 @@ public class ListOfWordWithImages {
                     this.listOfWords.get(randomNum).passWord();
                     this.numberOfPassedWords++;
                     this.selectedImage = this.listOfWords.get(randomNum);
-                    //this.listOfWords.remove(randomNum);
                     word = listOfWords.get(randomNum).getWord();
                     return listOfWords.get(randomNum);
                 }
